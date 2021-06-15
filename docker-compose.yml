@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  adminer:
+    image: adminer:4.8.1
+    ports:
+      - 8000:8080
+
+  mysql:
+    env_file: .env
+    build:
+      dockerfile: ./Dockerfile
+      context: ./mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  postgresql:
+    env_file: .env
+    build:
+      dockerfile: ./Dockerfile
+      context: ./postgresql
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+
+volumes:
+  mysql-data:
+  postgresql-data:
