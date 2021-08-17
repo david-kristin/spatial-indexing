@@ -1,0 +1,4 @@
+FROM adminer:4.8.1
+
+COPY adminer/fc-sqlite-connection-without-credentials.php /var/www/html/plugins
+COPY adminer/index.php /var/www/html/
