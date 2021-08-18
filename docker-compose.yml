@@ -2,7 +2,10 @@ version: '3.7'
 
 services:
   adminer:
-    image: adminer:4.8.1
+    env_file: .env
+    build:
+      dockerfile: ./Dockerfile
+      context: ./adminer
     ports:
       - 8000:8080
 
@@ -14,6 +17,16 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  sqlite:
+    env_file: .env
+    stdin_open: true
+    tty: true
+    build:
+      dockerfile: ./Dockerfile
+      context: ./sqlite
+    volumes:
+      - sqlite-data:/databases
+
   postgresql:
     env_file: .env
     build:
@@ -24,4 +37,5 @@ services:
 
 volumes:
   mysql-data:
+  sqlite-data:
   postgresql-data:
